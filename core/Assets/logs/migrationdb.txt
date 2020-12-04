@@ -1,0 +1,5 @@
+dotnet ef migrations add 'initailize@28082019'  --project hello.transaction.api.csproj --context NorthwindContext
+
+dotnet ef migrations script > "Migrations/initailize@28082019.sql"  --context NorthwindContext
+
+dotnet ef database update --context NorthwindContext
