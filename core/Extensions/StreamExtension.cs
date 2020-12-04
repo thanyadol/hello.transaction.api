@@ -1,5 +1,3 @@
-
-
 using System;
 using System.Collections.Generic;
 using System.Net;
@@ -12,7 +10,7 @@ namespace hello.transaction.core.Extensions
 {
     public static class StreamExtension
     {
-        public static string ConvertToBase64(this Stream stream)
+        public static byte[] ReadToEnd(this Stream stream)
         {
             byte[] bytes;
             using (var memoryStream = new MemoryStream())
@@ -21,8 +19,8 @@ namespace hello.transaction.core.Extensions
                 bytes = memoryStream.ToArray();
             }
 
-            string base64 = Convert.ToBase64String(bytes);
-            return base64; //new MemoryStream(Encoding.UTF8.GetBytes(base64));
+            //string base64 = Convert.ToBase64String(bytes);
+            return bytes;
         }
     }
 }

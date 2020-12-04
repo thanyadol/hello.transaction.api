@@ -18,6 +18,11 @@ namespace hello.transaction.core.Repositories
     where TEntity : class, IEntity<TKey>
     {
         Task<IEnumerable<TEntity>> ListAsync();
+
+        Task<TEntity> GetAsync(TKey id);
+        Task<TEntity> CreateAsync(TEntity entity);
+        Task<TEntity> UpdateAsync(TEntity entity, TKey id);
+        Task<IEnumerable<TEntity>> CreateRangeAsync(IEnumerable<TEntity> entities);
     }
 
     public class GenericRepository<TEntity, TKey> : IGenericRepository<TEntity, TKey>
@@ -71,7 +76,7 @@ namespace hello.transaction.core.Repositories
             return entity;
         }
 
-        public async Task<TEntity> GetAsync(string id)
+        public async Task<TEntity> GetAsync(TKey id)
         {
             var entity = await _dbContext.Set<TEntity>().FindAsync(id);
             return entity;
