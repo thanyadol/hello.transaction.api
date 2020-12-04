@@ -36,7 +36,7 @@ namespace hello.transaction.api.Controllers
         // Returns:
         //     list of transction
         //
-        [EnableCors("AllowCors")]
+        //[EnableCors("AllowCors")]
         [Route("list")]
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<Transaction>), StatusCodes.Status200OK)]
@@ -47,7 +47,7 @@ namespace hello.transaction.api.Controllers
             return Ok(entities);
         }
 
-        [EnableCors("AllowCors")]
+        //[EnableCors("AllowCors")]
         [Route("list/currency")]
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<Transaction>), StatusCodes.Status200OK)]
@@ -58,7 +58,7 @@ namespace hello.transaction.api.Controllers
             return Ok(entities);
         }
 
-        [EnableCors("AllowCors")]
+        //[EnableCors("AllowCors")]
         [Route("list/status")]
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<Transaction>), StatusCodes.Status200OK)]
@@ -69,7 +69,7 @@ namespace hello.transaction.api.Controllers
             return Ok(entities);
         }
 
-        [EnableCors("AllowCors")]
+        //[EnableCors("AllowCors")]
         [Route("list/date")]
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<Transaction>), StatusCodes.Status200OK)]

@@ -18,7 +18,7 @@ namespace hello.transaction.core.Middleware
 
         private readonly IConfiguration _configuration;
 
-        public LoggingMiddleware(RequestDelegate next, IConfiguration configuration, Serilog.ILogger _logger)
+        public LoggingMiddleware(RequestDelegate next, IConfiguration configuration)
         {
             _next = next;
             _configuration = configuration;

@@ -41,7 +41,7 @@ namespace hello.transaction.api.Controllers
         // Params:
         //      attachment model with base64 encoding content
         //
-        [EnableCors("AllowCors")]
+        //[EnableCors("AllowCors")]
         [Route("upload")]
         [HttpPost]
         [ProducesResponseType(typeof(IEnumerable<Attachment>), StatusCodes.Status200OK)]
@@ -76,7 +76,7 @@ namespace hello.transaction.api.Controllers
         // Returns:
         //     list of Attachment
         //
-        [EnableCors("AllowCors")]
+        //[EnableCors("AllowCors")]
         [Route("list")]
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<Attachment>), StatusCodes.Status200OK)]
@@ -97,7 +97,7 @@ namespace hello.transaction.api.Controllers
         // Params:
         //      attachment model with base64 encoding content
         //
-        [EnableCors("AllowCors")]
+        //[EnableCors("AllowCors")]
         [Route("post")]
         [HttpPost]
         [ProducesResponseType(typeof(IEnumerable<Attachment>), StatusCodes.Status200OK)]

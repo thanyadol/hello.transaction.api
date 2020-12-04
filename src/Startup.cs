@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using hello.transaction.core.Extensions;
+using hello.transaction.core.Middleware;
 
 namespace hello.transaction.api
 {
@@ -39,14 +40,19 @@ namespace hello.transaction.api
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "hello", Version = "v1" });
             });
 
-            // Create an HttpClientHandler object and set to use default credentials
-            HttpClientHandler handler = new HttpClientHandler();
-            handler.UseDefaultCredentials = true;
-            handler.ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
 
-            // Create an HttpClient object
-            var httpClient = new HttpClient(handler);
-            services.AddSingleton(httpClient);
+            //enable Cross origin
+            services.AddCors(o => o.AddPolicy("AllowCors", builder =>
+            {
+                builder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .WithOrigins(_configuration.GetValue<string>("AppSettings:CorsUrl", string.Empty))
+                    //.WithOrigins(Environment.Configuration.Instance.GetCorsURL())
+                    .AllowCredentials();
+            }));
+
+            services.AddHttpContextAccessor();
 
             services.AddMvc(options =>
             {
@@ -58,6 +64,7 @@ namespace hello.transaction.api
         public void Configure(IApplicationBuilder app)
         {
             //app.UseAuthentication();
+            app.UseCors("AllowCors");
 
             app.UseHsts();
 
@@ -73,10 +80,10 @@ namespace hello.transaction.api
 
             //for dependency injection service
             app.ApplicationServices.GetService<IDisposable>();
-            //app.ConfigureCustomExceptionMiddleware();
+            app.ConfigureCustomExceptionMiddleware();
 
             //Add our new middleware to the pipeline
-            //app.UseMiddleware<LoggingMiddleware>();
+            app.UseMiddleware<LoggingMiddleware>();
             app.UseHttpsRedirection();
             app.UseRouting();
 

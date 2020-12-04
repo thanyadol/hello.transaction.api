@@ -2,13 +2,18 @@ using System;
 using System.Configuration;
 using System.Linq;
 using System.Text;
+using AutoMapper;
+using FluentValidation;
+using hello.transaction.core.Mapper;
 using hello.transaction.core.Models;
 using hello.transaction.core.Repositories;
 using hello.transaction.core.Services;
+using hello.transaction.core.Validator;
 using Microsoft.Azure.Cosmos.Fluent;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace hello.transaction.core.Extensions
 {
@@ -23,21 +28,31 @@ namespace hello.transaction.core.Extensions
             //services.AddDbContext<NorthwindContext>(options =>
             //options.UseMySql(this._configuration.GetConnectionString("NorthwindConnection"),
             // x => x.MigrationsHistoryTable("__EFMigrationsHistory", "dbo")));
+            //enable Cross origin
 
-            //add an APIs Service
-            //services.AddHttpClient<IGoogleService, GoogleService>().SetHandlerLifetime(TimeSpan.FromMinutes(5));
+            //register memory cache
+            services.AddMemoryCache();
 
-            //for http request information
-            services.AddHttpContextAccessor();
+            // Add application services.
+            //services.AddTransient<IEmailSender, AuthMessageSender>();
+            //services.AddTransient<ISmsSender, AuthMessageSender>();
 
-            //http client factory
-            //Set 5 min as the lifetime for the HttpMessageHandler objects in the pool used for the Catalog Typed Client 
-            //services.AddHttpClient<IClientService, ClientService>()
-            //.SetHandlerLifetime(TimeSpan.FromMinutes(5));
+            // Auto Mapper Configurations
+            var mappingConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new TransactionXmlMapper());
+                mc.AddProfile(new TransactionPaymentMapper());
+            });
 
-            //register DI
-            //services.AddScoped<IAttachmentRepository, AttachmentRepository>();
-            //services.AddScoped<ITransactionRepository, TransactionRepository>();
+            IMapper mapper = mappingConfig.CreateMapper();
+            services.TryAddSingleton(mapper);
+
+            //validator
+            services.AddScoped<AbstractValidator<Transaction>, TransactionValidator>();
+
+
+            services.AddTransient<IGenericRepository<Attachment, string>, GenericRepository<Attachment, string>>();
+            services.AddTransient<IGenericRepository<Transaction, string>, GenericRepository<Transaction, string>>();
 
             services.AddScoped<IAttachmentService, AttachmentService>();
             services.AddScoped<ITransactionService, TransactionService>();
