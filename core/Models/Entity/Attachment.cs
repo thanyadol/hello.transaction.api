@@ -8,18 +8,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace hello.transaction.core.Models
 {
 
-    public class Attachment
+    public class Attachment : Entity<string>
     {
-        /// <summary>
-        /// Unique identity of record
-        /// </summary>
-        [Description("Unique identity of record")]
-        [Newtonsoft.Json.JsonProperty(PropertyName = "id")]
-
-        [Key]
-        [StringLength(50)]
-        public string Id { get; set; }
-
         /// <summary>
         /// Base 64 content of file
         /// </summary>

@@ -8,15 +8,8 @@ using System.Threading.Tasks;
 
 namespace hello.transaction.core.Models
 {
-    public class Transaction
+    public class Transaction : Entity<string>
     {
-        /// <summary>
-        /// Unique identity of record, Text max length 50
-        /// </summary>
-        [Description("Unique identity of record, Text max length 50")]
-        [Newtonsoft.Json.JsonProperty(PropertyName = "id")]
-        public string Id { get; set; }
-
         /// <summary>
         /// Amount in decimal, Decimal Number
         /// </summary>
