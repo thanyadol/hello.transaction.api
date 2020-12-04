@@ -115,6 +115,7 @@ namespace hello.transaction.core.Services
 
         public async Task<IEnumerable<TransactionPayment>> ListByDateAsync(DateTime from, DateTime to)
         {
+
             var entities = await _transactionRepository.ListAsync();
             entities = entities.Where(c => (c.TransactionDate.GetValueOrDefault().Date >= from.Date
                                         && c.TransactionDate.GetValueOrDefault().Date <= to.Date));
