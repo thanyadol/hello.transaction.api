@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
+using hello.transaction.core.Extensions;
 
 namespace hello.transaction.api
 {
@@ -29,7 +30,7 @@ namespace hello.transaction.api
         public void ConfigureServices(IServiceCollection services)
         {
 
-
+            services.Add2C2PTransactionSynce();
             services.AddApiVersioning();
 
             // Adds Swagger

@@ -33,7 +33,7 @@ namespace hello.transaction.api.Controllers
 
         //
         // Summary:
-        //      create an attachment by base64 content 
+        //      create an attachment by file form data
         //
         // Returns:
         //      post attachment from db
@@ -89,7 +89,7 @@ namespace hello.transaction.api.Controllers
 
         //
         // Summary:
-        //      create an attachment by base64 content 
+        //      create an attachment by base64content 
         //
         // Returns:
         //      post attachment from db
