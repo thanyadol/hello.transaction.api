@@ -14,7 +14,7 @@ using hello.transaction.core.Exceptions;
 using System.IO;
 using hello.transaction.core.Extensions;
 
-namespace hello.transaction.core.Controllers
+namespace hello.transaction.api.Controllers
 {
     //[Authorize]
     //[ServiceFilter(typeof(EnsureUserAuthorizeInAsync))]
