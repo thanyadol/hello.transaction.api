@@ -5,7 +5,7 @@ using System.Reflection;
 using System.Globalization;
 using System.Runtime.InteropServices;
 
-namespace hello.transaction.api.Models.DTO
+namespace hello.transaction.core.Models.DTO
 {
     [Serializable]
     public class Health
